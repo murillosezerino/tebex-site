@@ -1,26 +1,155 @@
-@import "tailwindcss";
+/* ─────────────────────────────────────────────
+   TEBEX LOG — Manual de Identidade Visual 2025
+   Fonte principal: Owners XWide Bold (pendente)
+   Fonte complementar: Montserrat (Google Fonts)
+───────────────────────────────────────────── */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── TOKENS DE MARCA ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Cores principais */
+  --color-black:  #0A0A0A; /* Pantone Black 6C */
+  --color-white:  #FFFFFF;
+
+  /* Cores complementares (RGB digital) */
+  --color-blue:   #0041E2;
+  --color-green:  #32B700;
+  --color-yellow: #FFD400;
+  --color-red:    #F22800;
+
+  /* Opacidades aprovadas pelo manual */
+  --color-blue-40:   rgba(0,  65, 226, 0.4);
+  --color-green-50:  rgba(50, 183,  0,  0.5);
+  --color-yellow-60: rgba(255,212,  0,  0.6);
+  --color-red-40:    rgba(242, 40,  0,  0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── RESET GLOBAL ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-black);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ─── HIERARQUIA TIPOGRÁFICA (Montserrat) ─── */
+/* Quando Owners XWide Bold estiver disponível,
+   substituir .font-brand por @font-face abaixo */
+
+/*
+@font-face {
+  font-family: 'OwnersXWide';
+  src: url('/fonts/OwnersXWide-Bold.woff2') format('woff2'),
+       url('/fonts/OwnersXWide-Bold.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* Classe para títulos — troca para OwnersXWide quando disponível */
+.font-brand {
+  font-family: 'Montserrat', sans-serif; /* → trocar para 'OwnersXWide' */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+/* Montserrat body — pesos conforme manual */
+.text-thin       { font-weight: 100; }
+.text-extralight { font-weight: 200; }
+.text-light      { font-weight: 300; }
+.text-regular    { font-weight: 400; }
+.text-medium     { font-weight: 500; }
+.text-semibold   { font-weight: 600; }
+.text-bold       { font-weight: 700; }
+.text-extrabold  { font-weight: 800; }
+.text-black      { font-weight: 900; }
+
+/* ─── PADRÃO DE GRADE ─── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── MARQUEE ─── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
+
+/* ─── FADE IN UP ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up             { animation: fadeInUp 0.6s ease forwards; }
+.fade-in-up.delay-1     { animation-delay: 0.1s; }
+.fade-in-up.delay-2     { animation-delay: 0.2s; }
+.fade-in-up.delay-3     { animation-delay: 0.3s; }
+.fade-in-up.delay-4     { animation-delay: 0.4s; }
+
+/* ─── PROPORCIONALIDADE DINÂMICA ─── */
+
+/* Fluid root font: 14px mobile → 16px desktop */
+html {
+  font-size: clamp(14px, 1vw + 12px, 16px);
+}
+
+/* Scroll suave global */
+html { scroll-behavior: smooth; }
+
+/* Seções com padding fluido */
+section {
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+}
+
+/* Headings escalam com viewport */
+h1 { font-size: clamp(2.5rem, 8vw, 7rem); }
+h2 { font-size: clamp(1.75rem, 4.5vw, 3.5rem); }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
+
+/* Max-widths de container fluidos */
+.container {
+  width: min(1280px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+/* Scrollbar oculta em tracks de carrossel */
+.scroll-hide { scrollbar-width: none; }
+.scroll-hide::-webkit-scrollbar { display: none; }
+
+/* Imagens sempre responsivas */
+img { max-width: 100%; height: auto; }
+
+/* Aspect ratios comuns */
+.ratio-16-9  { aspect-ratio: 16/9; }
+.ratio-4-3   { aspect-ratio: 4/3; }
+.ratio-1-1   { aspect-ratio: 1/1; }
+.ratio-21-9  { aspect-ratio: 21/9; }
