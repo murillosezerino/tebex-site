@@ -37,13 +37,13 @@ export default function Features() {
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
-    const card = track.children[active]
+    const card = track.children[active] as HTMLElement | undefined
     if (!card) return
     track.scrollTo({ left: card.offsetLeft - track.clientWidth / 2 + card.offsetWidth / 2, behavior: 'smooth' })
   }, [active])
 
-  const onTouchStart = (e) => setDragStart(e.touches[0].pageX)
-  const onTouchEnd = (e) => {
+  const onTouchStart = (e: React.TouchEvent) => setDragStart(e.touches[0].pageX)
+  const onTouchEnd = (e: React.TouchEvent) => {
     const diff = dragStart - e.changedTouches[0].pageX
     if (diff > 50)  { goTo(active + 1); resetAuto() }
     if (diff < -50) { goTo(active - 1); resetAuto() }
