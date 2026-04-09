@@ -20,7 +20,7 @@ export default function Features() {
   const autoRef = useRef(null)
   const total = items.length
 
-  const goTo = useCallback((idx) => {
+  const goTo = useCallback((idx: number) => {
     setActive(Math.max(0, Math.min(total - 1, idx)))
   }, [total])
 
