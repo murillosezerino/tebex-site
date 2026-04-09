@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -28,7 +29,7 @@ export default function TermosPage() {
         <div style={{ maxWidth: 800, margin: '0 auto', padding: 'clamp(4rem, 8vw, 6rem) 1.5rem' }}>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.8rem' }}>Início</a>
+            <Link href="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.8rem' }}>Início</Link>
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
             <span style={{ color: '#FFD400', fontSize: '0.8rem' }}>Termos de Uso</span>
           </div>

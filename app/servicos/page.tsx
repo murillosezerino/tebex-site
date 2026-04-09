@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -77,7 +78,7 @@ const services = [
 
 export default function ServicosPage() {
   return (
-    
+    <>
       {/* JSON-LD — Service */}
       <script
         type="application/ld+json"
@@ -113,7 +114,7 @@ export default function ServicosPage() {
       <section style={{ backgroundColor: '#0A0A0A', paddingTop: '68px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(4rem,8vw,6rem) 1.5rem clamp(3rem,6vw,5rem)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s' }}>Início</a>
+            <Link href="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s' }}>Início</Link>
             <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem' }}>›</span>
             <span style={{ color: '#FFD400', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Serviços</span>
           </div>
@@ -215,5 +216,6 @@ export default function ServicosPage() {
 
       <Footer />
     </main>
+    </>
   )
 }
