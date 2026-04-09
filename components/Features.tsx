@@ -17,7 +17,7 @@ export default function Features() {
   const [active, setActive] = useState(0)
   const [dragStart, setDragStart] = useState(0)
   const trackRef = useRef(null)
-  const autoRef = useRef(null)
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const total = items.length
 
   const goTo = useCallback((idx: number) => {
