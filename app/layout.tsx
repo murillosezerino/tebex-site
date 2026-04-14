@@ -3,6 +3,7 @@ import './globals.css'
 import WhatsAppWidget from '@/components/WhatsAppWidget'
 import ScrollToTop from '@/components/ScrollToTop'
 import SecurityAlert from '@/components/SecurityAlert'
+import { ParallaxProvider } from '@/components/ParallaxProvider'
 
 const SITE_URL = 'https://www.tebexlog.com.br'
 
@@ -37,9 +38,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>
-        <SecurityAlert />
-        {children}
-        <ScrollToTop />
+        <ParallaxProvider>
+          <SecurityAlert />
+          {children}
+          <ScrollToTop />
+        </ParallaxProvider>
         <WhatsAppWidget />
         <script
           type="application/ld+json"

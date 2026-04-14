@@ -1,3 +1,31 @@
+'use client'
+
+import { ParallaxBg, Reveal, FloatingElement } from './ParallaxProvider'
+
+const keyPoints = [
+  {
+    title: 'Frota Rastreada',
+    desc: 'GPS e bloqueio remoto em todos os veículos da operação.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+    ),
+  },
+  {
+    title: 'Monitoramento 24h',
+    desc: 'Central ativa todos os dias, sem parar, com resposta imediata.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    ),
+  },
+  {
+    title: 'Cobertura Nacional',
+    desc: 'Atendimento em todo o território brasileiro, sem exceções.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    ),
+  },
+]
+
 export default function Credibility() {
   return (
     <section id="about" style={{
@@ -10,22 +38,11 @@ export default function Credibility() {
       textAlign: 'center',
       backgroundColor: 'var(--black)',
     }}>
-      {/* Imagem de fundo */}
-      <img
+      <ParallaxBg
         src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1920&q=80"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          opacity: 0.1,
-          pointerEvents: 'none',
-        }}
+        speed={0.25}
+        opacity={0.1}
       />
-      {/* Overlay escuro */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -33,92 +50,130 @@ export default function Credibility() {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: '700px', position: 'relative', zIndex: 1 }}>
-        <p style={{
-          fontFamily: 'var(--font)',
-          fontSize: '0.7rem',
-          fontWeight: 600,
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          color: 'var(--accent)',
-          marginBottom: '1rem',
-          background: 'rgba(255,212,0,0.1)',
-          display: 'inline-block',
-          padding: '0.4rem 1rem',
-        }}>
-          Sobre a Tebex Log
-        </p>
+      <div style={{ maxWidth: '780px', position: 'relative', zIndex: 1 }}>
+        <Reveal>
+          <p style={{
+            fontFamily: 'var(--font)',
+            fontSize: '0.7rem',
+            fontWeight: 600,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--accent)',
+            marginBottom: '1rem',
+            background: 'rgba(255,212,0,0.1)',
+            display: 'inline-block',
+            padding: '0.4rem 1rem',
+          }}>
+            Sobre a Tebex Log
+          </p>
+        </Reveal>
 
-        <h2 style={{
-          fontFamily: 'var(--font)',
-          fontWeight: 200,
-          color: 'var(--white)',
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          lineHeight: 1.1,
-          letterSpacing: '-0.03em',
-          marginBottom: '2rem',
-        }}>
-          Transportadora nacional com foco em seguranca e gestao de risco.
-        </h2>
+        <Reveal delay={0.15}>
+          <h2 style={{
+            fontFamily: 'var(--font)',
+            fontWeight: 200,
+            color: 'var(--white)',
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+            marginBottom: '2rem',
+          }}>
+            Transportadora nacional com foco em segurança e gestão de risco.
+          </h2>
+        </Reveal>
 
-        <p style={{
-          fontFamily: 'var(--font)',
-          fontWeight: 300,
-          color: 'rgba(255,255,255,0.6)',
-          fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-          lineHeight: 1.9,
-          marginBottom: '3rem',
-        }}>
-          Frota propria e agregados com rastreamento via satelite, central de monitoramento 24h
-          e parceria com as principais gerenciadoras de risco do mercado. Cobertura em todo o territorio nacional.
-        </p>
+        <Reveal delay={0.3}>
+          <p style={{
+            fontFamily: 'var(--font)',
+            fontWeight: 300,
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+            lineHeight: 1.9,
+            marginBottom: '3rem',
+          }}>
+            Frota própria e agregados com rastreamento via satélite, central de monitoramento 24h
+            e parceria com as principais gerenciadoras de risco do mercado. Cobertura em todo o território nacional.
+          </p>
+        </Reveal>
 
-        {/* Key points */}
+        {/* Key points — redesigned cards */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '1rem',
           marginBottom: '3rem',
           textAlign: 'left',
         }}>
-          {[
-            { title: 'Frota Rastreada', desc: 'GPS e bloqueio remoto em todos os veiculos' },
-            { title: 'Monitoramento 24h', desc: 'Central ativa todos os dias, sem parar' },
-            { title: 'Cobertura Nacional', desc: 'Atendimento em todo territorio brasileiro' },
-          ].map(item => (
-            <div key={item.title} style={{
-              padding: '1.25rem',
-              borderLeft: '3px solid var(--accent)',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderLeftWidth: '3px',
-              borderLeftColor: 'var(--accent)',
-            }}>
-              <div style={{
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: 'var(--white)',
-                marginBottom: '0.3rem',
-              }}>
-                {item.title}
-              </div>
-              <div style={{
-                fontSize: '0.8rem',
-                fontWeight: 300,
-                color: 'rgba(255,255,255,0.5)',
-                lineHeight: 1.5,
-              }}>
-                {item.desc}
-              </div>
-            </div>
+          {keyPoints.map((item, i) => (
+            <Reveal key={item.title} delay={0.4 + i * 0.15} direction="left">
+              <FloatingElement speed={0.03}>
+                <div className="cred-card" style={{
+                  position: 'relative',
+                  padding: '1.5rem 1.25rem',
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  overflow: 'hidden',
+                }}>
+                  {/* Left accent bar */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    bottom: '12px',
+                    left: 0,
+                    width: '2px',
+                    background: 'linear-gradient(180deg, var(--accent) 0%, rgba(255,212,0,0.1) 100%)',
+                  }} />
+
+                  {/* Icon */}
+                  <div style={{
+                    color: 'var(--accent)',
+                    marginBottom: '0.85rem',
+                    opacity: 0.9,
+                  }}>
+                    {item.icon}
+                  </div>
+
+                  <div style={{
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    color: 'var(--white)',
+                    marginBottom: '0.4rem',
+                    letterSpacing: '-0.01em',
+                  }}>
+                    {item.title}
+                  </div>
+                  <div style={{
+                    fontSize: '0.8rem',
+                    fontWeight: 300,
+                    color: 'rgba(255,255,255,0.45)',
+                    lineHeight: 1.6,
+                  }}>
+                    {item.desc}
+                  </div>
+                </div>
+              </FloatingElement>
+            </Reveal>
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#cotacao" className="btn btn-accent">Solicitar cotacao</a>
-          <a href="/servicos" className="btn btn-outline">Nossos servicos</a>
-        </div>
+        <Reveal delay={0.7}>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="#cotacao" className="btn btn-accent">Solicitar cotação</a>
+            <a href="/servicos" className="btn btn-outline">Nossos serviços</a>
+          </div>
+        </Reveal>
       </div>
+
+      <style>{`
+        .cred-card {
+          transition: border-color 0.3s, transform 0.3s, background 0.3s;
+        }
+        .cred-card:hover {
+          border-color: rgba(255,212,0,0.2) !important;
+          transform: translateY(-3px);
+          background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%) !important;
+        }
+      `}</style>
     </section>
   )
 }

@@ -87,12 +87,12 @@ export default function QuoteForm() {
             <div>
               {lbl('Tipo de carga *')}
               <select name='carga' value={f.carga} onChange={h} required style={{ ...inp, cursor: 'pointer' }}>
-                <option value=''>Selecione...</option>
-                <option value='Fracionada'>Fracionada LTL</option>
-                <option value='Fechada'>Fechada FTL</option>
-                <option value='Alto valor'>Alto valor</option>
-                <option value='Perigosa'>Perigosa</option>
-                <option value='Outro'>Outro</option>
+                <option value='' style={{ background: '#1a1a1a', color: '#fff' }}>Selecione...</option>
+                <option value='Fracionada' style={{ background: '#1a1a1a', color: '#fff' }}>Fracionada LTL</option>
+                <option value='Fechada' style={{ background: '#1a1a1a', color: '#fff' }}>Fechada FTL</option>
+                <option value='Alto valor' style={{ background: '#1a1a1a', color: '#fff' }}>Alto valor</option>
+                <option value='Perigosa' style={{ background: '#1a1a1a', color: '#fff' }}>Perigosa</option>
+                <option value='Outro' style={{ background: '#1a1a1a', color: '#fff' }}>Outro</option>
               </select>
             </div>
             <div>{lbl('Peso')}<input name='peso' value={f.peso} onChange={h} placeholder='Ex: 500 kg' style={inp} /></div>
