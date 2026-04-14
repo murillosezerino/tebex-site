@@ -56,7 +56,7 @@ export default function Hero() {
   const onTouchMove = (e: React.TouchEvent) => { touchEnd.current = e.touches[0].clientX }
   const onTouchEnd = () => {
     const diff = touchStart.current - touchEnd.current
-    if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1) }
+    if (Math.abs(diff) > 50) { if (diff > 0) goTo(current + 1); else goTo(current - 1) }
     touchStart.current = 0; touchEnd.current = 0
   }
 

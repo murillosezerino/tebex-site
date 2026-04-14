@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
+import { useEffect, useRef, useState, createContext, useContext } from 'react'
 
 // ── Scroll Y context (one listener, shared by all consumers) ──
 const ScrollContext = createContext(0)
