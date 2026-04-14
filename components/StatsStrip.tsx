@@ -1,140 +1,167 @@
 'use client'
 
+import { useRef, useState, useEffect } from 'react'
 import { ParallaxBg, Reveal } from './ParallaxProvider'
+
+function AnimatedNumber({ value, suffix = '', prefix = '' }: { value: number; suffix?: string; prefix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [display, setDisplay] = useState(0)
+  const [started, setStarted] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect() } },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!started) return
+    const duration = 2000
+    const start = performance.now()
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplay(Math.round(eased * value))
+      if (progress < 1) requestAnimationFrame(animate)
+    }
+    requestAnimationFrame(animate)
+  }, [started, value])
+
+  return <span ref={ref}>{prefix}{display}{suffix}</span>
+}
 
 export default function StatsStrip() {
   const stats = [
-    { value: '24/7', label: 'Central de monitoramento', icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    )},
-    { value: '100%', label: 'Frota rastreada', icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-    )},
-    { value: 'Nacional', label: 'Cobertura completa', icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    )},
-    { value: 'Zero', label: 'Tolerância ao risco', icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-    )},
+    {
+      value: 24, suffix: '/7', label: 'Central de\nmonitoramento',
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+      desc: 'Equipe dedicada operando sem interrupção',
+    },
+    {
+      value: 100, suffix: '%', label: 'Frota\nrastreada',
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>,
+      desc: 'Todos os veículos com GPS e bloqueio',
+    },
+    {
+      value: 5000, suffix: '+', label: 'Entregas\nrealizadas',
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
+      desc: 'Cargas transportadas com segurança',
+    },
+    {
+      value: 0, suffix: '', prefix: 'Zero', label: 'Tolerância\nao risco',
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>,
+      desc: 'Protocolos rigorosos em toda operação',
+    },
   ]
 
   return (
     <section style={{
       background: 'var(--black)',
       position: 'relative',
-      padding: 'clamp(4rem, 8vw, 6rem) 1.5rem',
+      padding: 'clamp(5rem, 10vw, 8rem) 1.5rem',
     }}>
       <ParallaxBg
-        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80"
+        src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1920&q=85"
         speed={0.2}
-        opacity={0.12}
+        opacity={0.18}
       />
       <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'linear-gradient(90deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.9) 100%)',
-        pointerEvents: 'none',
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.95) 100%)',
       }} />
 
-      <div style={{
-        maxWidth: '1100px',
-        width: '100%',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: 'clamp(1rem, 2vw, 1.5rem)',
-        position: 'relative',
-        zIndex: 1,
-      }}>
-        {stats.map((s, i) => (
-          <Reveal key={s.label} delay={i * 0.12} direction="up">
-            <div className="stat-card" style={{
-              position: 'relative',
-              padding: '2rem 1.5rem',
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              overflow: 'hidden',
-              textAlign: 'left',
+      <div style={{ maxWidth: '1120px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        {/* Section header */}
+        <Reveal>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(3rem, 6vw, 4.5rem)' }}>
+            <span style={{
+              color: 'var(--accent)', fontSize: '0.7rem', fontWeight: 600,
+              letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '1rem',
             }}>
-              {/* Top accent line */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '2px',
-                background: 'linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%)',
-                opacity: 0.6,
-              }} />
+              Em números
+            </span>
+            <h2 style={{
+              color: '#fff', fontWeight: 200,
+              fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+              lineHeight: 1.15, margin: 0,
+            }}>
+              Resultados que comprovam <span style={{ color: 'var(--accent)' }}>excelência</span>
+            </h2>
+          </div>
+        </Reveal>
 
-              {/* Glow */}
-              <div style={{
-                position: 'absolute',
-                top: '-40px',
-                right: '-40px',
-                width: '120px',
-                height: '120px',
-                background: 'radial-gradient(circle, rgba(255,212,0,0.06) 0%, transparent 70%)',
-                pointerEvents: 'none',
-              }} />
-
-              {/* Icon */}
-              <div style={{
-                color: 'var(--accent)',
-                marginBottom: '1.25rem',
-                opacity: 0.8,
+        {/* Stats grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+          gap: '1px',
+          background: 'rgba(255,255,255,0.06)',
+          border: '1px solid rgba(255,255,255,0.06)',
+        }}>
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.1} direction="up">
+              <div className="stat-card" style={{
+                padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+                background: 'var(--black)',
+                position: 'relative',
+                overflow: 'hidden',
               }}>
-                {s.icon}
-              </div>
+                {/* Hover glow */}
+                <div className="stat-glow" style={{
+                  position: 'absolute',
+                  top: '-50px', right: '-50px',
+                  width: '150px', height: '150px',
+                  background: 'radial-gradient(circle, rgba(255,212,0,0.06) 0%, transparent 70%)',
+                  pointerEvents: 'none',
+                  opacity: 0, transition: 'opacity 0.4s',
+                }} />
 
-              {/* Value */}
-              <div style={{
-                fontFamily: 'var(--font)',
-                fontWeight: 200,
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
-                letterSpacing: '-0.04em',
-                lineHeight: 1,
-                color: 'var(--white)',
-                marginBottom: '0.5rem',
-              }}>
-                {s.value}
-              </div>
+                {/* Icon */}
+                <div style={{ color: 'var(--accent)', opacity: 0.7, marginBottom: '1.25rem' }}>
+                  {s.icon}
+                </div>
 
-              {/* Label */}
-              <div style={{
-                fontFamily: 'var(--font)',
-                fontWeight: 400,
-                fontSize: '0.72rem',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.4)',
-              }}>
-                {s.label}
-              </div>
+                {/* Number */}
+                <div style={{
+                  fontFamily: 'var(--font)', fontWeight: 200,
+                  fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                  letterSpacing: '-0.04em', lineHeight: 1,
+                  color: 'var(--white)', marginBottom: '0.5rem',
+                }}>
+                  {s.prefix ? s.prefix : <AnimatedNumber value={s.value} suffix={s.suffix} />}
+                </div>
 
-              {/* Bottom decorative line */}
-              <div style={{
-                position: 'absolute',
-                bottom: '0.75rem',
-                right: '1rem',
-                width: '30px',
-                height: '1px',
-                background: 'rgba(255,212,0,0.2)',
-              }} />
-            </div>
-          </Reveal>
-        ))}
+                {/* Label */}
+                <div style={{
+                  fontSize: '0.78rem', fontWeight: 500, letterSpacing: '0.06em',
+                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)',
+                  whiteSpace: 'pre-line', lineHeight: 1.4, marginBottom: '0.5rem',
+                }}>
+                  {s.label}
+                </div>
+
+                {/* Description */}
+                <div style={{
+                  fontSize: '0.78rem', fontWeight: 300,
+                  color: 'rgba(255,255,255,0.3)', lineHeight: 1.5,
+                }}>
+                  {s.desc}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
 
       <style>{`
-        .stat-card {
-          transition: border-color 0.3s, transform 0.3s, background 0.3s;
-        }
-        .stat-card:hover {
-          border-color: rgba(255,212,0,0.25) !important;
-          transform: translateY(-2px);
-          background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%) !important;
-        }
+        .stat-card { transition: background 0.3s; }
+        .stat-card:hover { background: #0E0E0E !important; }
+        .stat-card:hover .stat-glow { opacity: 1 !important; }
       `}</style>
     </section>
   )

@@ -58,9 +58,9 @@ export default function FinalCTA() {
       overflow: 'hidden',
     }}>
       <ParallaxBg
-        src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&q=80"
+        src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1920&q=85"
         speed={0.2}
-        opacity={0.15}
+        opacity={0.2}
       />
       {/* Overlay */}
       <div style={{

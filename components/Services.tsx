@@ -49,9 +49,9 @@ export default function Services() {
       }}
     >
       <ParallaxBg
-        src="https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1920&q=80"
+        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=85"
         speed={0.2}
-        opacity={0.1}
+        opacity={0.18}
       />
       <div style={{
         position: 'absolute',

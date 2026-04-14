@@ -38,7 +38,7 @@ export default function Footer() {
       >
         <div className="tbx-footer-inner">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <img src="/LogoR.webp" alt="Tebex Log" style={{ height: '32px', width: 'auto', filter: 'invert(1) brightness(2)' }} />
+            <img src="/logo-dark.png" alt="Tebex Log" style={{ height: '24px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
             <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem', fontWeight: 400 }}>
               &copy; {year}
             </span>

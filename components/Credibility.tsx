@@ -39,9 +39,9 @@ export default function Credibility() {
       backgroundColor: 'var(--black)',
     }}>
       <ParallaxBg
-        src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1920&q=80"
+        src="https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1920&q=85"
         speed={0.25}
-        opacity={0.1}
+        opacity={0.2}
       />
       <div style={{
         position: 'absolute',
