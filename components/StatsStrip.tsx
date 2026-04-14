@@ -48,14 +48,14 @@ export default function StatsStrip() {
       desc: 'Todos os veículos com GPS e bloqueio',
     },
     {
-      value: 5000, suffix: '+', label: 'Entregas\nrealizadas',
+      value: 3200, suffix: '+', label: 'Viagens\nmonitoradas',
       icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
-      desc: 'Cargas transportadas com segurança',
+      desc: 'Viagens com rastreamento em 2025',
     },
     {
-      value: 0, suffix: '', prefix: 'Zero', label: 'Tolerância\nao risco',
+      value: 26, suffix: '', prefix: '', label: 'Estados\natendidos',
       icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>,
-      desc: 'Protocolos rigorosos em toda operação',
+      desc: 'Cobertura em todo o território nacional',
     },
   ]
 

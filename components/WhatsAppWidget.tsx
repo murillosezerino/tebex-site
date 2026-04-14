@@ -5,7 +5,7 @@ import { useState } from 'react'
 const WA_BASE = 'https://wa.me/5512997364365'
 
 const options = [
-  { label: 'Solicitar cotacao', msg: 'Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20frete' },
+  { label: 'Solicitar cotação', msg: 'Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20frete' },
   { label: 'Transporte de carga', msg: 'Ol%C3%A1%2C%20preciso%20de%20informa%C3%A7%C3%B5es%20sobre%20transporte%20de%20carga' },
   { label: 'Rastreamento', msg: 'Ol%C3%A1%2C%20preciso%20rastrear%20minha%20carga' },
   { label: 'Falar com consultor', msg: 'Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20consultor' },

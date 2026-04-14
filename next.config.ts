@@ -40,14 +40,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/contato',
-        destination: '/#contato',
-        permanent: true,
-      },
-      {
         source: '/sobre',
-        destination: '/#about',
-        permanent: true,
+        destination: '/?s=about',
+        permanent: false,
       },
     ]
   },

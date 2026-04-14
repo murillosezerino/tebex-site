@@ -69,7 +69,7 @@ export default function SecurityAlert() {
             color: 'rgba(255,255,255,0.5)', fontWeight: 300, fontSize: '0.85rem',
             lineHeight: 1.7, marginBottom: '1.5rem',
           }}>
-            A Tebex Log reforça seu compromisso com a seguranca de seus clientes e parceiros.
+            A Tebex Log reforça seu compromisso com a segurança de seus clientes e parceiros.
           </p>
 
           {/* Bullet points */}
