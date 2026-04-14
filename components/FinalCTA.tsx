@@ -1,91 +1,159 @@
-// Loggi CTA final — split layout, texto esquerda, visual direita
-export default function FinalCTA() {
-  return (
-    <>
-      <style>{`
-        .cta-grid {
-          display: flex;
-          flex-direction: column;
-        }
-        .cta-text-side {
-          padding: clamp(3.5rem, 8vw, 6rem) 1.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .cta-visual-side {
-          min-height: 280px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #0A0A0A;
-          overflow: hidden;
-        }
-        @media (min-width: 768px) {
-          .cta-grid { flex-direction: row; }
-          .cta-text-side { flex: 0 0 50%; padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem); }
-          .cta-visual-side { flex: 1; min-height: 420px; }
-        }
-      `}</style>
+'use client'
 
-      <section id="contato" style={{ backgroundColor: '#FFD400', overflow: 'hidden' }}>
-        <div className="cta-grid">
-          <div className="cta-text-side">
-            <h2 className="font-brand" style={{ color: '#0A0A0A', fontSize: 'clamp(2rem, 5vw, 4rem)', lineHeight: 1, marginBottom: '1.25rem' }}>
-              COMECE AGORA<br />COM A TEBEX LOG.
-            </h2>
-            <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', lineHeight: 1.8, marginBottom: '2rem', maxWidth: '30rem' }}>
-              Envios seguros, rastreamento total e entrega em todo o Brasil.
-              Nosso compromisso é a sua segurança.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <a href="tel:12997364365" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '1rem 2rem', backgroundColor: '#0A0A0A', color: '#FFD400', fontWeight: 800, fontSize: '0.875rem', letterSpacing: '0.08em', textTransform: 'uppercase', borderRadius: '4px', textDecoration: 'none' }}>
-                📞 (12) 99736-4365
-              </a>
-              <a href="mailto:juliana.soares@tebexlog.com.br" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '1rem 2rem', backgroundColor: 'transparent', color: '#0A0A0A', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.06em', textTransform: 'uppercase', borderRadius: '4px', textDecoration: 'none', border: '2px solid rgba(0,0,0,0.2)' }}>
-                ✉️ juliana.soares@tebexlog.com.br
-              </a>
+import { useState } from 'react'
+import type { ChangeEvent, CSSProperties } from 'react'
+
+type FormState = {
+  nome: string; tel: string; email: string
+  origem: string; destino: string; carga: string; peso: string; obs: string
+}
+
+export default function FinalCTA() {
+  const [f, setF] = useState<FormState>({
+    nome: '', tel: '', email: '',
+    origem: '', destino: '', carga: '', peso: '', obs: '',
+  })
+
+  const h = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setF(p => ({ ...p, [e.target.name]: e.target.value }))
+
+  const sub = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const m = [
+      'Cotação Tebex Log', '',
+      'Nome: ' + f.nome,
+      'Tel: ' + f.tel, 'Email: ' + f.email, '',
+      'Origem: ' + f.origem, 'Destino: ' + f.destino,
+      'Carga: ' + f.carga, 'Peso: ' + f.peso,
+      f.obs ? 'Obs: ' + f.obs : '',
+    ].filter(Boolean).join('\n')
+    window.open('https://wa.me/5512997364365?text=' + encodeURIComponent(m), '_blank')
+  }
+
+  const inp: CSSProperties = {
+    width: '100%', padding: '0.85rem 0.75rem',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: 0,
+    color: '#fff', fontSize: '0.9rem', fontWeight: 300, outline: 'none', boxSizing: 'border-box',
+    transition: 'border-color 0.2s',
+  }
+
+  const lbl: CSSProperties = {
+    color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.4rem', display: 'block', fontWeight: 500,
+  }
+
+  return (
+    <section id="cotacao" style={{
+      backgroundColor: 'var(--black, #0A0A0A)',
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'clamp(3rem, 6vw, 5rem) 1.5rem',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Imagem de fundo — estrada noturna */}
+      <img
+        src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&q=80"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: 0.15,
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Overlay */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse at 50% 30%, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.95) 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ width: '100%', maxWidth: 540, position: 'relative', zIndex: 1 }}>
+
+        <div style={{
+          color: 'var(--accent)',
+          fontSize: '0.65rem',
+          fontWeight: 600,
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          textAlign: 'center',
+          marginBottom: '1rem',
+        }}>
+          Cotação gratuita
+        </div>
+
+        <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 200, lineHeight: 1.15, textAlign: 'center', margin: '0 0 0.75rem 0' }}>
+          Solicitar cotação
+        </h2>
+        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem', fontWeight: 300, textAlign: 'center', margin: '0 0 3rem 0', lineHeight: 1.7 }}>
+          Preencha e receba uma proposta personalizada.
+        </p>
+
+        <form onSubmit={sub} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.25rem',
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          padding: 'clamp(1.5rem, 4vw, 2.5rem)',
+        }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+            <div style={{ gridColumn: 'span 2' }}>
+              <span style={lbl}>Nome *</span>
+              <input name="nome" value={f.nome} onChange={h} required placeholder="Seu nome" style={inp} />
+            </div>
+            <div>
+              <span style={lbl}>Telefone *</span>
+              <input name="tel" value={f.tel} onChange={h} required placeholder="(00) 00000-0000" style={inp} />
+            </div>
+            <div>
+              <span style={lbl}>Email</span>
+              <input name="email" type="email" value={f.email} onChange={h} placeholder="email@email.com" style={inp} />
+            </div>
+            <div>
+              <span style={lbl}>Origem *</span>
+              <input name="origem" value={f.origem} onChange={h} required placeholder="Cidade - UF" style={inp} />
+            </div>
+            <div>
+              <span style={lbl}>Destino *</span>
+              <input name="destino" value={f.destino} onChange={h} required placeholder="Cidade - UF" style={inp} />
+            </div>
+            <div>
+              <span style={lbl}>Tipo de carga</span>
+              <select name="carga" value={f.carga} onChange={h} style={{ ...inp, cursor: 'pointer', appearance: 'none' }}>
+                <option value="">Selecione...</option>
+                <option value="Fracionada">Fracionada LTL</option>
+                <option value="Fechada">Fechada FTL</option>
+                <option value="Alto valor">Alto valor</option>
+                <option value="Perigosa">Perigosa</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+            <div>
+              <span style={lbl}>Peso</span>
+              <input name="peso" value={f.peso} onChange={h} placeholder="Ex: 500 kg" style={inp} />
+            </div>
+            <div style={{ gridColumn: 'span 2' }}>
+              <span style={lbl}>Observações</span>
+              <textarea name="obs" value={f.obs} onChange={h} placeholder="Informações adicionais..." rows={3} style={{ ...inp, resize: 'vertical' }} />
             </div>
           </div>
 
-          <div className="cta-visual-side">
-            <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
-              <defs>
-                <pattern id="vg" width="30" height="30" patternUnits="userSpaceOnUse">
-                  <path d="M30 0L0 0 0 30" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1"/>
-                </pattern>
-              </defs>
-              <rect width="520" height="360" fill="#0A0A0A"/>
-              <rect width="520" height="360" fill="url(#vg)"/>
+          <button className="btn btn-accent" type="submit" style={{ width: '100%', marginTop: '0.5rem' }}>
+            Enviar pelo WhatsApp
+          </button>
+        </form>
 
-              {/* Caminhão grande centralizado */}
-              <rect x="40" y="135" width="295" height="125" rx="5" fill="#1C1C1C" stroke="#FFD400" strokeWidth="2"/>
-              <rect x="335" y="168" width="120" height="92" rx="5" fill="#1E1E1E" stroke="#FFD400" strokeWidth="2"/>
-              <rect x="350" y="180" width="88" height="50" rx="3" fill="rgba(255,212,0,0.08)" stroke="rgba(255,212,0,0.35)" strokeWidth="1.5"/>
-              <text x="95" y="188" fontFamily="monospace" fontWeight="900" fontSize="26" fill="#FFD400" letterSpacing="6">TEBEX</text>
-              <text x="148" y="218" fontFamily="monospace" fontWeight="700" fontSize="14" fill="rgba(255,212,0,0.5)" letterSpacing="4">LOG</text>
-              {[125,245,395].map((cx,i) => (
-                <g key={i}>
-                  <circle cx={cx} cy={265} r="27" fill="#111" stroke="#FFD400" strokeWidth="2.5"/>
-                  <circle cx={cx} cy={265} r="13" fill="#1a1a1a" stroke="rgba(255,212,0,0.35)" strokeWidth="1.5"/>
-                  <circle cx={cx} cy={265} r="4" fill="#FFD400"/>
-                </g>
-              ))}
-              <line x1="0" y1="296" x2="520" y2="296" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
-              <ellipse cx="250" cy="298" rx="210" ry="10" fill="rgba(0,0,0,0.35)"/>
-
-              {/* Badge */}
-              <rect x="380" y="30" width="118" height="70" rx="8" fill="rgba(255,212,0,0.1)" stroke="rgba(255,212,0,0.3)" strokeWidth="1"/>
-              <circle cx="400" cy="55" r="5" fill="#32B700"/>
-              <text x="414" y="50" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.45)">RASTREANDO</text>
-              <text x="397" y="85" fontFamily="monospace" fontWeight="700" fontSize="11" fill="#FFD400">ATIVO 24/7</text>
-
-              {/* Texto rodapé */}
-              <text x="260" y="330" textAnchor="middle" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.2)" letterSpacing="2">NOSSO COMPROMISSO É A SUA SEGURANÇA</text>
-            </svg>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

@@ -26,7 +26,7 @@ export default function QuoteForm() {
   const sub = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const m = [
-      'Cotacao Tebex Log', '',
+      'Cotação Tebex Log', '',
       'Nome: ' + f.nome,
       'Empresa: ' + f.empresa,
       'Tel: ' + f.tel,
@@ -68,7 +68,7 @@ export default function QuoteForm() {
     <section id='cotacao' style={{ backgroundColor: '#0D0D0D', padding: 'clamp(4rem,8vw,7rem) 0' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 1.5rem' }}>
         <h2 className='font-brand' style={{ color: '#fff', fontSize: 'clamp(1.75rem,4vw,3rem)', textAlign: 'center', marginBottom: '2rem' }}>
-          RECEBA SUA <span style={{ color: '#FFD400' }}>COTACAO.</span>
+          RECEBA SUA <span style={{ color: '#FFD400' }}>COTAÇÃO.</span>
         </h2>
         <form onSubmit={sub} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={row}>
@@ -98,8 +98,8 @@ export default function QuoteForm() {
             <div>{lbl('Peso')}<input name='peso' value={f.peso} onChange={h} placeholder='Ex: 500 kg' style={inp} /></div>
           </div>
           <div>
-            {lbl('Observacoes')}
-            <textarea name='obs' value={f.obs} onChange={h} placeholder='Informacoes adicionais...' rows={3} style={{ ...inp, resize: 'vertical' }} />
+            {lbl('Observações')}
+            <textarea name='obs' value={f.obs} onChange={h} placeholder='Informações adicionais...' rows={3} style={{ ...inp, resize: 'vertical' }} />
           </div>
           <button
             type='submit'

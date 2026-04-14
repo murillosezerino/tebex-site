@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import TopBar from '@/components/TopBar'
 import WhatsAppWidget from '@/components/WhatsAppWidget'
+import ScrollToTop from '@/components/ScrollToTop'
 import SecurityAlert from '@/components/SecurityAlert'
 
 const SITE_URL = 'https://www.tebexlog.com.br'
@@ -36,27 +36,26 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: 'Tebex Log',
-          url: SITE_URL,
-          description: 'Transportadora nacional especializada em transporte terrestre de cargas com gestão de risco completa.',
-          telephone: '+5512997364365',
-          email: 'juliana.soares@tebexlog.com.br',
-          address: { '@type': 'PostalAddress', addressCountry: 'BR' },
-          areaServed: { '@type': 'Country', name: 'Brazil' },
-          contactPoint: { '@type': 'ContactPoint', telephone: '+5512997364365', contactType: 'customer service', availableLanguage: 'Portuguese' },
-        }) }} />
-      </head>
       <body style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>
-        <TopBar />
         <SecurityAlert />
         {children}
+        <ScrollToTop />
         <WhatsAppWidget />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Tebex Log',
+            url: SITE_URL,
+            description: 'Transportadora nacional especializada em transporte terrestre de cargas com gestão de risco completa.',
+            telephone: '+5512997364365',
+            email: 'juliana.soares@tebexlog.com.br',
+            address: { '@type': 'PostalAddress', addressCountry: 'BR' },
+            areaServed: { '@type': 'Country', name: 'Brazil' },
+            contactPoint: { '@type': 'ContactPoint', telephone: '+5512997364365', contactType: 'customer service', availableLanguage: 'Portuguese' },
+          }) }}
+        />
       </body>
     </html>
   )

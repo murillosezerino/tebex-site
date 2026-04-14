@@ -1,110 +1,62 @@
 'use client'
 
+
 export default function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer style={{ backgroundColor: '#060606', borderTop: '1px solid rgba(255,255,255,0.06)', padding: 'clamp(3rem, 6vw, 4.5rem) 0 0' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 1.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 'clamp(2rem, 5vw, 3rem)', paddingBottom: 'clamp(2rem, 5vw, 3rem)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+    <>
+      <style>{`
+        .tbx-footer-inner {
+          display: flex; align-items: center; justify-content: space-between;
+          max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;
+          height: 60px;
+        }
+        .tbx-footer-links {
+          display: flex; align-items: center; gap: 1.5rem;
+        }
+        .tbx-footer-links a {
+          color: rgba(255,255,255,0.3); font-size: 0.7rem; font-weight: 400;
+          text-decoration: none; transition: color 0.2s;
+        }
+        .tbx-footer-links a:hover { color: #fff; }
+        @media (max-width: 767px) {
+          .tbx-footer-inner {
+            flex-direction: column; justify-content: center;
+            height: auto; padding: 1.25rem 1.5rem; gap: 0.75rem;
+            text-align: center;
+          }
+          .tbx-footer-links { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+        }
+      `}</style>
 
-          {/* Marca */}
-          <div style={{ gridColumn: 'span 2' }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: '1rem' }}>
-              <span className="font-brand" style={{ color: '#FFFFFF', fontSize: '1.4rem', letterSpacing: '0.08em' }}>TEBEX</span>
-              <span className="font-brand" style={{ color: '#FFD400', fontSize: '1.1rem', letterSpacing: '0.08em' }}>LOG</span>
-            </div>
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', lineHeight: 1.75, maxWidth: '20rem', marginBottom: '1.25rem' }}>
-              Excelência em transporte terrestre e gestão de risco. Segurança não é um diferencial — é prioridade.
-            </p>
-
-            {/* Endereço */}
-            <div style={{ marginBottom: '1.25rem' }}>
-              <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Endereço</p>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', lineHeight: 1.7 }}>
-                📍 São José dos Campos — SP<br />
-                Atuação em todo o Brasil
-              </p>
-            </div>
-
-            {/* Contatos */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {[
-                { href: 'tel:12997364365', label: '📞 (12) 99736-4365' },
-                { href: 'https://wa.me/5512997364365', label: '💬 WhatsApp', target: '_blank' },
-                { href: 'mailto:juliana.soares@tebexlog.com.br', label: '✉️ juliana.soares@tebexlog.com.br' },
-              ].map(item => (
-                <a key={item.href} href={item.href} target={(item as any).target} rel={(item as any).target ? 'noopener noreferrer' : undefined}
-                  style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', fontWeight: 400, textDecoration: 'none' }}
-                  onMouseOver={e => (e.currentTarget.style.color = '#FFD400')}
-                  onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
-                >{item.label}</a>
-              ))}
-            </div>
+      <footer
+        style={{
+          backgroundColor: 'var(--black)',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+        }}
+      >
+        <div className="tbx-footer-inner">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <img src="/LogoR.webp" alt="Tebex Log" style={{ height: '32px', width: 'auto', filter: 'invert(1) brightness(2)' }} />
+            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem', fontWeight: 400 }}>
+              &copy; {year}
+            </span>
           </div>
 
-          {/* Serviços */}
-          <div>
-            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: '1rem' }}>Serviços</h4>
-            {['Transporte de Cargas', 'Frota Própria e Agregada', 'Gestão de Risco', 'Rastreamento Satelital', 'Escolta Armada', 'Seguros de Carga'].map(link => (
-              <a key={link} href="/servicos" style={{ display: 'block', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', textDecoration: 'none', marginBottom: '0.5rem' }}
-                onMouseOver={e => (e.currentTarget.style.color = '#FFD400')}
-                onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-              >{link}</a>
-            ))}
+          <div className="tbx-footer-links">
+            <a href="/servicos">Serviços</a>
+            <a href="/contato">Contato</a>
+            <a href="/privacidade">Privacidade</a>
+            <a href="/termos">Termos</a>
+            <a href="/agregados">Agregados</a>
           </div>
 
-          {/* Empresa */}
-          <div>
-            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: '1rem' }}>Empresa</h4>
-            {[
-              { label: 'Sobre a Tebex Log', href: '/#about' },
-              { label: 'Serviços', href: '/servicos' },
-              { label: 'Segurança', href: '/#seguranca' },
-              { label: 'Solicitar Cotação', href: '/#cotacao' },
-              { label: 'Contato', href: '/#contato' },
-            ].map(link => (
-              <a key={link.label} href={link.href} style={{ display: 'block', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', textDecoration: 'none', marginBottom: '0.5rem' }}
-                onMouseOver={e => (e.currentTarget.style.color = '#FFD400')}
-                onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-              >{link.label}</a>
-            ))}
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: '1rem' }}>Legal</h4>
-            {[
-              { label: 'Política de Privacidade', href: '/privacidade' },
-              { label: 'Termos de Uso', href: '/termos' },
-            ].map(link => (
-              <a key={link.label} href={link.href} style={{ display: 'block', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', textDecoration: 'none', marginBottom: '0.5rem' }}
-                onMouseOver={e => (e.currentTarget.style.color = '#FFD400')}
-                onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-              >{link.label}</a>
-            ))}
-          </div>
+          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', fontWeight: 400 }}>
+            Pindamonhangaba — SP
+          </span>
         </div>
-
-        {/* Bottom */}
-        <div style={{ padding: '1.25rem 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.75rem' }}>
-            © {new Date().getFullYear()} Tebex Log. Todos os direitos reservados.
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-            <a href="/privacidade" style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.72rem', textDecoration: 'none' }}
-              onMouseOver={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}
-            >Privacidade</a>
-            <a href="/termos" style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.72rem', textDecoration: 'none' }}
-              onMouseOver={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}
-            >Termos</a>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <div style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: '#FFD400' }} />
-              <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.72rem' }}>Central 24/7</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }
