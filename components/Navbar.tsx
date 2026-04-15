@@ -90,9 +90,9 @@ export default function Navbar() {
             maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem',
             height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           }}>
-            <span onClick={() => window.location.href = '/'} style={{ textDecoration: 'none', zIndex: 110, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-dark.png" alt="Tebex Log" style={{ height: '32px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
+            <span onClick={() => window.location.href = '/'} style={{ textDecoration: 'none', zIndex: 110, display: 'flex', alignItems: 'baseline', cursor: 'pointer', gap: '0.15rem' }}>
+              <span style={{ color: '#FFFFFF', fontSize: '1.3rem', fontWeight: 800, letterSpacing: '-0.02em', fontFamily: 'var(--font)' }}>TEBEX</span>
+              <span style={{ color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.02em', fontFamily: 'var(--font)' }}>LOG</span>
             </span>
 
             <nav className="tbx-desktop" style={{ alignItems: 'center', gap: '2.5rem' }}>

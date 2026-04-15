@@ -38,8 +38,10 @@ export default function Footer() {
         <div className="tbx-footer-top">
           {/* Brand */}
           <div className="tbx-footer-col">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-dark.png" alt="Tebex Log" style={{ height: '28px', width: 'auto', filter: 'brightness(0) invert(1)', marginBottom: '1rem' }} />
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.12rem', marginBottom: '1rem' }}>
+              <span style={{ color: '#FFFFFF', fontSize: '1.2rem', fontWeight: 800, letterSpacing: '-0.02em', fontFamily: 'var(--font)' }}>TEBEX</span>
+              <span style={{ color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em', fontFamily: 'var(--font)' }}>LOG</span>
+            </div>
             <p>Transportadora nacional especializada em gestão de risco e monitoramento de cargas.</p>
           </div>
 

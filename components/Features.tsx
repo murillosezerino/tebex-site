@@ -5,7 +5,7 @@ import { ParallaxBg, Reveal } from './ParallaxProvider'
 
 const items = [
   { tag: 'Rastreamento', title: 'Frota Rastreada 24h', description: 'Toda a frota com rastreamento via satélite e bloqueio remoto. Visibilidade total em tempo real.', details: ['Rastreamento via satélite', 'Bloqueio remoto', 'Histórico de rotas', 'Alertas de desvio'],
-    image: 'https://images.unsplash.com/photo-1619252584172-a83a949b6efd?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80',
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> },
   { tag: 'Monitoramento', title: 'Central Ativa 24/7', description: 'Central operando ininterruptamente. Controle de paradas, desvios e comunicação direta com motoristas.', details: ['Equipe 24h', 'Comunicação direta', 'Controle de paradas', 'Resposta imediata'],
     image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80',
@@ -14,10 +14,10 @@ const items = [
     image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80',
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
   { tag: 'Tecnologia', title: 'Câmeras Embarcadas', description: 'Monitoramento visual com IA para detecção de fadiga e distração. Segurança ativa durante toda a viagem.', details: ['IA para fadiga', 'Monitoramento visual', 'Alertas de risco', 'Gravação segura'],
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1580584126903-c17d41830450?w=800&q=80',
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> },
   { tag: 'Proteção', title: 'Escolta e Apoio', description: 'Escolta armada e pontos de apoio estratégicos para cargas de alto valor. Seguros personalizados.', details: ['Escolta armada', 'Pontos de apoio', 'Seguros personalizados', 'Cobertura total'],
-    image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1591768793355-74d04bb6608f?w=800&q=80',
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
   { tag: 'Processos', title: 'Compliance Operacional', description: 'Equipe treinada em gestão de risco e compliance. Processos padronizados com tecnologia embarcada.', details: ['Equipe certificada', 'Processos ISO', 'Tecnologia embarcada', 'Relatórios'],
     image: 'https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=800&q=80',
