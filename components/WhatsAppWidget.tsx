@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 type Option = {
   label: string
-  display: string
   phone: string // digits only with country code
   msg: string   // url-encoded
 }
@@ -12,31 +11,26 @@ type Option = {
 const options: Option[] = [
   {
     label: 'Solicitar cotação',
-    display: '(12) 99736-4365',
     phone: '5512997364365',
     msg: 'Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20frete',
   },
   {
     label: 'Gerenciamento de risco',
-    display: '(12) 98290-2769',
     phone: '5512982902769',
     msg: 'Ol%C3%A1%2C%20preciso%20falar%20sobre%20gerenciamento%20de%20risco',
   },
   {
     label: 'Emissão CTE',
-    display: '(12) 99625-2128',
     phone: '5512996252128',
     msg: 'Ol%C3%A1%2C%20preciso%20de%20suporte%20com%20emiss%C3%A3o%20de%20CTE',
   },
   {
     label: 'Agregados',
-    display: '(12) 99736-4365',
     phone: '5512997364365',
     msg: 'Ol%C3%A1%2C%20sou%20motorista%20agregado%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es',
   },
   {
     label: 'Outros assuntos',
-    display: '(12) 99736-4365',
     phone: '5512997364365',
     msg: 'Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20Tebex%20Log',
   },
@@ -106,11 +100,7 @@ export default function WhatsAppWidget() {
               </svg>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-              <span style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Tebex Log</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#25D366', boxShadow: '0 0 6px #25D366' }} />
-                Online · responde em minutos
-              </span>
+              <span style={{ color: '#fff', fontSize: '0.9rem', fontWeight: 600 }}>Tebex Log</span>
             </div>
           </div>
           <button
@@ -136,7 +126,7 @@ export default function WhatsAppWidget() {
         </div>
 
         {/* Options */}
-        <div style={{ padding: '0 1.25rem 0.5rem' }}>
+        <div style={{ padding: '0 1.25rem 1rem' }}>
           {options.map(opt => (
             <a
               key={opt.label}
@@ -145,13 +135,8 @@ export default function WhatsAppWidget() {
               rel="noopener noreferrer"
               className="wa-opt"
             >
-              <span style={{ display: 'flex', flexDirection: 'column', gap: '0.18rem' }}>
-                <span className="wa-opt-label" style={{ fontSize: '0.82rem', fontWeight: 500, transition: 'color 0.25s' }}>
-                  {opt.label}
-                </span>
-                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', fontVariantNumeric: 'tabular-nums' }}>
-                  {opt.display}
-                </span>
+              <span className="wa-opt-label" style={{ fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.25s' }}>
+                {opt.label}
               </span>
               <span className="wa-opt-arrow" style={{
                 color: 'rgba(255,255,255,0.3)', fontSize: '0.95rem',
@@ -159,13 +144,6 @@ export default function WhatsAppWidget() {
               }}>&rarr;</span>
             </a>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div style={{ padding: '0.6rem 1.25rem 0.9rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <p style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.04em' }}>
-            Atendimento humanizado · 24h
-          </p>
         </div>
       </div>
 
