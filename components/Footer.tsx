@@ -32,18 +32,18 @@ export default function Footer() {
           z-index: 0;
         }
 
-        /* Big background logo — full TEBEX LOG visible, centered, vertical fade only */
+        /* Big background logo — bleeds slightly off the edges for impact */
         .tbx-footer-bg-logo {
           position: absolute;
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: min(1600px, 92%);
-          opacity: 0.08;
+          width: min(2400px, 140%);
+          opacity: 0.09;
           pointer-events: none;
           z-index: 0;
-          mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
-          -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+          -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
         }
         .tbx-footer-bg-logo svg { width: 100%; height: auto; display: block; }
 
@@ -118,7 +118,7 @@ export default function Footer() {
         @media (max-width: 900px) {
           .tbx-footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
           .tbx-footer-brand-card { grid-column: span 2; }
-          .tbx-footer-bg-logo { width: 110%; opacity: 0.06; }
+          .tbx-footer-bg-logo { width: 170%; opacity: 0.07; }
         }
         @media (max-width: 540px) {
           .tbx-footer-top { grid-template-columns: 1fr; padding-top: 3rem; }
@@ -126,7 +126,7 @@ export default function Footer() {
           .tbx-footer-bottom {
             flex-direction: column; text-align: center; gap: 0.5rem;
           }
-          .tbx-footer-bg-logo { width: 130%; opacity: 0.05; }
+          .tbx-footer-bg-logo { width: 220%; opacity: 0.06; }
         }
 
         /* ANTT RNTRC compliance badge */
