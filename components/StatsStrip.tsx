@@ -15,7 +15,7 @@ export default function StatsStrip() {
       desc: 'Todos os veículos com GPS e bloqueio remoto',
     },
     {
-      value: '3.200+', label: 'Viagens\nmonitoradas',
+      value: '953', label: 'Viagens\nmonitoradas',
       icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
       desc: 'Cargas transportadas com rastreamento em 2025',
     },

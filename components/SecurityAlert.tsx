@@ -97,11 +97,11 @@ export default function SecurityAlert() {
               <a href="https://www.tebexlog.com.br" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 300 }}>
                 www.tebexlog.com.br
               </a>
-              <a href="tel:12997364365" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 300 }}>
-                (12) 99736-4365
+              <a href="tel:1232660076" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 300 }}>
+                (12) 3266-0076
               </a>
-              <a href="mailto:juliana.soares@tebexlog.com.br" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 300 }}>
-                juliana.soares@tebexlog.com.br
+              <a href="mailto:contato@tebexlog.com.br" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 300 }}>
+                contato@tebexlog.com.br
               </a>
             </div>
           </div>

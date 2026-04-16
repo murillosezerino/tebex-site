@@ -2,13 +2,44 @@
 
 import { useState } from 'react'
 
-const WA_BASE = 'https://wa.me/5512997364365'
+type Option = {
+  label: string
+  display: string
+  phone: string // digits only with country code
+  msg: string   // url-encoded
+}
 
-const options = [
-  { label: 'Solicitar cotação', msg: 'Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20frete' },
-  { label: 'Transporte de carga', msg: 'Ol%C3%A1%2C%20preciso%20de%20informa%C3%A7%C3%B5es%20sobre%20transporte%20de%20carga' },
-  { label: 'Rastreamento', msg: 'Ol%C3%A1%2C%20preciso%20rastrear%20minha%20carga' },
-  { label: 'Falar com consultor', msg: 'Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20consultor' },
+const options: Option[] = [
+  {
+    label: 'Solicitar cotação',
+    display: '(12) 99736-4365',
+    phone: '5512997364365',
+    msg: 'Ol%C3%A1%2C%20gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20frete',
+  },
+  {
+    label: 'Gerenciamento de risco',
+    display: '(12) 98290-2769',
+    phone: '5512982902769',
+    msg: 'Ol%C3%A1%2C%20preciso%20falar%20sobre%20gerenciamento%20de%20risco',
+  },
+  {
+    label: 'Emissão CTE',
+    display: '(12) 99625-2128',
+    phone: '5512996252128',
+    msg: 'Ol%C3%A1%2C%20preciso%20de%20suporte%20com%20emiss%C3%A3o%20de%20CTE',
+  },
+  {
+    label: 'Agregados',
+    display: '(12) 99736-4365',
+    phone: '5512997364365',
+    msg: 'Ol%C3%A1%2C%20sou%20motorista%20agregado%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es',
+  },
+  {
+    label: 'Outros assuntos',
+    display: '(12) 99736-4365',
+    phone: '5512997364365',
+    msg: 'Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20Tebex%20Log',
+  },
 ]
 
 export default function WhatsAppWidget() {
@@ -20,12 +51,20 @@ export default function WhatsAppWidget() {
         .wa-panel {
           transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
         }
-        .wa-panel-enter {
-          opacity: 1; transform: translateY(0);
+        .wa-panel-enter { opacity: 1; transform: translateY(0); }
+        .wa-panel-exit  { opacity: 0; transform: translateY(12px); pointer-events: none; }
+
+        .wa-opt {
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 0.85rem 0;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          color: #fff; text-decoration: none;
+          transition: padding 0.25s, color 0.25s;
         }
-        .wa-panel-exit {
-          opacity: 0; transform: translateY(12px); pointer-events: none;
-        }
+        .wa-opt:last-child { border-bottom: none; }
+        .wa-opt:hover { padding-left: 0.4rem; }
+        .wa-opt:hover .wa-opt-label { color: var(--accent); }
+        .wa-opt:hover .wa-opt-arrow { color: var(--accent); transform: translateX(2px); }
       `}</style>
 
       {/* Panel */}
@@ -35,31 +74,50 @@ export default function WhatsAppWidget() {
           position: 'fixed',
           bottom: 84,
           right: 24,
-          width: 300,
-          background: 'rgba(10,10,10,0.95)',
+          width: 320,
+          maxWidth: 'calc(100vw - 48px)',
+          background: 'rgba(10,10,10,0.96)',
           backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
           border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '4px',
+          borderRadius: '14px',
           zIndex: 999,
           overflow: 'hidden',
+          boxShadow: '0 24px 60px -12px rgba(0,0,0,0.7)',
         }}
       >
+        {/* Top accent line */}
+        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, #25D366, transparent)' }} />
+
         {/* Header */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '1rem 1.25rem',
+          padding: '1rem 1.25rem 0.85rem',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ color: '#FFFFFF', fontSize: '0.875rem', fontWeight: 500 }}>Tebex Log</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#25D366' }} />
-              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)' }}>Online</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <div style={{
+              width: 32, height: 32, borderRadius: '50%',
+              background: '#25D366',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 0 3px rgba(37,211,102,0.18)',
+            }}>
+              <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+              </svg>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+              <span style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Tebex Log</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)' }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#25D366', boxShadow: '0 0 6px #25D366' }} />
+                Online · responde em minutos
+              </span>
             </div>
           </div>
           <button
             onClick={() => setOpen(false)}
+            aria-label="Fechar"
             style={{
-              background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
+              background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)',
               fontSize: '1rem', cursor: 'pointer', padding: '0.25rem', lineHeight: 1,
             }}
           >
@@ -71,42 +129,42 @@ export default function WhatsAppWidget() {
         <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
 
         {/* Message */}
-        <div style={{ padding: '1rem 1.25rem 0.5rem' }}>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 300, fontSize: '0.82rem', margin: 0 }}>
-            Como podemos ajudar?
+        <div style={{ padding: '0.85rem 1.25rem 0.4rem' }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300, fontSize: '0.78rem', margin: 0 }}>
+            Escolha o assunto para falar diretamente com o setor responsável.
           </p>
         </div>
 
         {/* Options */}
-        <div style={{ padding: '0 1.25rem' }}>
-          {options.map((opt, i) => (
+        <div style={{ padding: '0 1.25rem 0.5rem' }}>
+          {options.map(opt => (
             <a
               key={opt.label}
-              href={`${WA_BASE}?text=${opt.msg}`}
+              href={`https://wa.me/${opt.phone}?text=${opt.msg}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'block',
-                padding: '0.75rem 0',
-                borderBottom: i < options.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                color: '#FFFFFF',
-                textDecoration: 'none',
-                fontSize: '0.8rem',
-                fontWeight: 400,
-                transition: 'color 0.2s',
-              }}
-              onMouseOver={e => (e.currentTarget.style.color = 'var(--accent, #FFD400)')}
-              onMouseOut={e => (e.currentTarget.style.color = '#FFFFFF')}
+              className="wa-opt"
             >
-              {opt.label}
+              <span style={{ display: 'flex', flexDirection: 'column', gap: '0.18rem' }}>
+                <span className="wa-opt-label" style={{ fontSize: '0.82rem', fontWeight: 500, transition: 'color 0.25s' }}>
+                  {opt.label}
+                </span>
+                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', fontVariantNumeric: 'tabular-nums' }}>
+                  {opt.display}
+                </span>
+              </span>
+              <span className="wa-opt-arrow" style={{
+                color: 'rgba(255,255,255,0.3)', fontSize: '0.95rem',
+                transition: 'color 0.25s, transform 0.25s',
+              }}>&rarr;</span>
             </a>
           ))}
         </div>
 
         {/* Footer */}
-        <div style={{ padding: '0.75rem 1.25rem 1rem', marginTop: '0.25rem' }}>
-          <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
-            Resposta em minutos · 24h
+        <div style={{ padding: '0.6rem 1.25rem 0.9rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <p style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.04em' }}>
+            Atendimento humanizado · 24h
           </p>
         </div>
       </div>
@@ -118,9 +176,9 @@ export default function WhatsAppWidget() {
           position: 'fixed',
           bottom: 24,
           right: 24,
-          width: 52,
-          height: 52,
-          borderRadius: '8px',
+          width: 56,
+          height: 56,
+          borderRadius: '50%',
           backgroundColor: '#25D366',
           border: 'none',
           cursor: 'pointer',
@@ -128,20 +186,32 @@ export default function WhatsAppWidget() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
-          transition: 'opacity 0.2s',
+          transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s',
+          boxShadow: '0 8px 24px -6px rgba(37,211,102,0.55), 0 0 0 0 rgba(37,211,102,0.3)',
+          animation: open ? 'none' : 'wa-pulse 2.4s infinite',
         }}
+        onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.08)')}
+        onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
         aria-label="Falar no WhatsApp"
       >
         {open ? (
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M15 5L5 15M5 5l10 10" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <path d="M15 5L5 15M5 5l10 10" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
+          <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
         )}
       </button>
+
+      <style>{`
+        @keyframes wa-pulse {
+          0%   { box-shadow: 0 8px 24px -6px rgba(37,211,102,0.55), 0 0 0 0 rgba(37,211,102,0.5); }
+          70%  { box-shadow: 0 8px 24px -6px rgba(37,211,102,0.55), 0 0 0 14px rgba(37,211,102,0); }
+          100% { box-shadow: 0 8px 24px -6px rgba(37,211,102,0.55), 0 0 0 0 rgba(37,211,102,0); }
+        }
+      `}</style>
     </>
   )
 }

@@ -43,7 +43,7 @@ Não vendemos, alugamos ou compartilhamos suas informações pessoais com tercei
     title: '6. Seus direitos (LGPD)',
     content: `Conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018), você tem direito a: confirmar a existência de tratamento de dados; acessar seus dados; corrigir dados incompletos ou desatualizados; solicitar a anonimização, bloqueio ou eliminação de dados desnecessários; revogar o consentimento a qualquer momento.
 
-Para exercer seus direitos, entre em contato pelo e-mail: juliana.soares@tebexlog.com.br`,
+Para exercer seus direitos, entre em contato pelo e-mail: contato@tebexlog.com.br`,
   },
   {
     title: '7. Cookies',
@@ -59,7 +59,7 @@ Para exercer seus direitos, entre em contato pelo e-mail: juliana.soares@tebexlo
   },
   {
     title: '10. Contato',
-    content: `Para dúvidas sobre esta política ou para exercer seus direitos, entre em contato:\n\nTebex Log\nEncarregado de Dados (DPO): juliana.soares@tebexlog.com.br\nTelefone: (12) 99736-4365`,
+    content: `Para dúvidas sobre esta política ou para exercer seus direitos, entre em contato:\n\nTebex Log\nE-mail: contato@tebexlog.com.br\nTelefone: (12) 3266-0076`,
   },
 ]
 

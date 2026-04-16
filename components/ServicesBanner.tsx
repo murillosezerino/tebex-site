@@ -5,9 +5,9 @@ import { Reveal } from './ParallaxProvider'
 
 const banners = [
   {
-    title: 'Carga Fracionada',
-    tag: 'LTL',
-    desc: 'Consolidação de volumes menores com coleta agendada e rastreamento.',
+    title: 'Coleta Agendada',
+    tag: 'Operação',
+    desc: 'Coleta no endereço e horário combinados, com rastreamento ponta a ponta.',
     image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=85',
     href: '/servicos#transporte',
   },

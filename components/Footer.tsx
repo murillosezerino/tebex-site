@@ -32,26 +32,20 @@ export default function Footer() {
           z-index: 0;
         }
 
-        /* Big background logo — sits behind content like a "horizon" */
+        /* Big background logo — full TEBEX LOG visible, centered, vertical fade only */
         .tbx-footer-bg-logo {
           position: absolute;
           left: 50%;
-          bottom: 4.5rem;
-          transform: translateX(-50%);
-          width: min(1500px, 96%);
-          opacity: 0.07;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: min(1600px, 92%);
+          opacity: 0.08;
           pointer-events: none;
           z-index: 0;
-          filter: blur(0.3px);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
+          -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
         }
         .tbx-footer-bg-logo svg { width: 100%; height: auto; display: block; }
-        /* Soft mask so it fades from sides + bottom for a "spotlight on the logo" feel */
-        .tbx-footer-bg-logo {
-          mask-image:
-            radial-gradient(ellipse 70% 80% at 50% 50%, #000 30%, transparent 75%);
-          -webkit-mask-image:
-            radial-gradient(ellipse 70% 80% at 50% 50%, #000 30%, transparent 75%);
-        }
 
         .tbx-footer-top {
           position: relative; z-index: 1;
@@ -124,7 +118,7 @@ export default function Footer() {
         @media (max-width: 900px) {
           .tbx-footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
           .tbx-footer-brand-card { grid-column: span 2; }
-          .tbx-footer-bg-logo { bottom: 5rem; opacity: 0.06; }
+          .tbx-footer-bg-logo { width: 110%; opacity: 0.06; }
         }
         @media (max-width: 540px) {
           .tbx-footer-top { grid-template-columns: 1fr; padding-top: 3rem; }
@@ -132,7 +126,41 @@ export default function Footer() {
           .tbx-footer-bottom {
             flex-direction: column; text-align: center; gap: 0.5rem;
           }
-          .tbx-footer-bg-logo { bottom: 6rem; opacity: 0.05; }
+          .tbx-footer-bg-logo { width: 130%; opacity: 0.05; }
+        }
+
+        /* ANTT RNTRC compliance badge */
+        .tbx-antt-badge {
+          display: inline-flex; align-items: center; gap: 0.6rem;
+          padding: 0.6rem 0.85rem;
+          background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: var(--radius-sm);
+          align-self: flex-start;
+          transition: border-color 0.3s, background 0.3s;
+        }
+        .tbx-antt-badge:hover {
+          border-color: rgba(255,212,0,0.3);
+          background: linear-gradient(135deg, rgba(255,212,0,0.06), rgba(255,212,0,0.01));
+        }
+        .tbx-antt-shield {
+          width: 32px; height: 32px;
+          display: inline-flex; align-items: center; justify-content: center;
+          background: linear-gradient(135deg, var(--accent), #FFB800);
+          border-radius: 6px;
+          color: #0A0A0A;
+          font-weight: 800; font-size: 0.5rem;
+          letter-spacing: 0.05em;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 8px rgba(255,212,0,0.25);
+        }
+        .tbx-antt-meta { display: flex; flex-direction: column; gap: 0.1rem; line-height: 1.1; }
+        .tbx-antt-label {
+          font-size: 0.55rem; font-weight: 600; letter-spacing: 0.16em;
+          text-transform: uppercase; color: rgba(255,255,255,0.4);
+        }
+        .tbx-antt-value {
+          font-size: 0.78rem; font-weight: 600; color: #fff;
+          letter-spacing: 0.02em;
         }
       `}</style>
 
@@ -163,6 +191,13 @@ export default function Footer() {
             <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '22rem' }}>
               Transportadora nacional especializada em gestão de risco e monitoramento de cargas.
             </p>
+            <div className="tbx-antt-badge" aria-label="ANTT · RNTRC ativa">
+              <span className="tbx-antt-shield">ANTT</span>
+              <span className="tbx-antt-meta">
+                <span className="tbx-antt-label">Registro</span>
+                <span className="tbx-antt-value">RNTRC ativa</span>
+              </span>
+            </div>
           </div>
 
           {/* Links */}
@@ -183,8 +218,8 @@ export default function Footer() {
           {/* Contact info */}
           <div className="tbx-footer-col">
             <h4>Contato</h4>
-            <a href="tel:12997364365">(12) 99736-4365</a>
-            <a href="mailto:juliana.soares@tebexlog.com.br">juliana.soares@tebexlog.com.br</a>
+            <a href="tel:1232660076">(12) 3266-0076</a>
+            <a href="mailto:contato@tebexlog.com.br">contato@tebexlog.com.br</a>
             <p>Pindamonhangaba — SP</p>
           </div>
         </div>
@@ -192,10 +227,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="tbx-footer-bottom">
           <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.72rem', fontWeight: 400 }}>
-            &copy; {year} Tebex Log — CNPJ: 56.918.318/0001-16
+            &copy; {year} Tebex Log — CNPJ: 54.834.367/0001-30
           </span>
           <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.65rem', fontWeight: 300 }}>
-            RNTRC ativa · Seguro de carga · Cobertura nacional
+            ANTT/RNTRC ativa · Seguro de carga · Cobertura nacional
           </span>
         </div>
       </footer>

@@ -2,24 +2,31 @@
 
 import { useState } from 'react'
 import type { ChangeEvent, CSSProperties } from 'react'
+import Link from 'next/link'
 import { ParallaxBg, Reveal } from './ParallaxProvider'
 
 type FormState = {
   nome: string; tel: string; email: string
   origem: string; destino: string; carga: string; peso: string; obs: string
+  aceito: boolean
 }
 
 export default function FinalCTA() {
   const [f, setF] = useState<FormState>({
     nome: '', tel: '', email: '',
     origem: '', destino: '', carga: '', peso: '', obs: '',
+    aceito: false,
   })
 
-  const h = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
-    setF(p => ({ ...p, [e.target.name]: e.target.value }))
+  const h = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const target = e.target as HTMLInputElement
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    setF(p => ({ ...p, [target.name]: value }))
+  }
 
   const sub = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!f.aceito) return
     const m = [
       'Cotação Tebex Log', '',
       'Nome: ' + f.nome,
@@ -127,10 +134,9 @@ export default function FinalCTA() {
                 <span style={lbl}>Tipo de carga</span>
                 <select name="carga" value={f.carga} onChange={h} style={{ ...inp, cursor: 'pointer', appearance: 'none' }}>
                   <option value="" style={optStyle}>Selecione...</option>
-                  <option value="Fracionada" style={optStyle}>Fracionada LTL</option>
+                  <option value="Coleta agendada" style={optStyle}>Coleta agendada</option>
                   <option value="Fechada" style={optStyle}>Fechada FTL</option>
                   <option value="Alto valor" style={optStyle}>Alto valor</option>
-                  <option value="Perigosa" style={optStyle}>Perigosa</option>
                   <option value="Outro" style={optStyle}>Outro</option>
                 </select>
               </div>
@@ -144,7 +150,41 @@ export default function FinalCTA() {
               </div>
             </div>
 
-            <button className="btn btn-accent" type="submit" style={{ width: '100%', marginTop: '0.5rem' }}>
+            <label style={{
+              display: 'flex', alignItems: 'flex-start', gap: '0.65rem',
+              cursor: 'pointer', userSelect: 'none', marginTop: '0.25rem',
+            }}>
+              <input
+                type="checkbox" name="aceito" checked={f.aceito} onChange={h} required
+                style={{
+                  flexShrink: 0, marginTop: '0.15rem',
+                  width: '16px', height: '16px',
+                  accentColor: 'var(--accent)', cursor: 'pointer',
+                }}
+              />
+              <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.78rem', lineHeight: 1.55, fontWeight: 300 }}>
+                Li e aceito os{' '}
+                <Link href="/termos" target="_blank" style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 2 }}>
+                  Termos de Uso
+                </Link>
+                {' '}e a{' '}
+                <Link href="/privacidade" target="_blank" style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 2 }}>
+                  Política de Privacidade
+                </Link>
+                .
+              </span>
+            </label>
+
+            <button
+              className="btn btn-accent" type="submit"
+              disabled={!f.aceito}
+              style={{
+                width: '100%', marginTop: '0.5rem',
+                opacity: f.aceito ? 1 : 0.45,
+                cursor: f.aceito ? 'pointer' : 'not-allowed',
+                transition: 'opacity 0.3s',
+              }}
+            >
               Enviar pelo WhatsApp
             </button>
           </form>

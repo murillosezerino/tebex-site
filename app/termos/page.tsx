@@ -19,7 +19,7 @@ const sections = [
   { title: '7. Propriedade intelectual', content: `Todo o conteúdo deste site, incluindo textos, imagens, logotipos, marcas e código, é propriedade da Tebex Log ou de seus licenciadores. É vedada a reprodução, distribuição ou uso comercial sem autorização prévia por escrito.` },
   { title: '8. Links externos', content: `Este site pode conter links para sites de terceiros. A Tebex Log não tem controle sobre o conteúdo desses sites e não se responsabiliza por suas práticas de privacidade ou conteúdo.` },
   { title: '9. Legislação aplicável', content: `Estes termos são regidos pelas leis brasileiras. Fica eleito o foro da Comarca de Pindamonhangaba — SP para dirimir quaisquer controvérsias decorrentes destes termos.` },
-  { title: '10. Contato', content: `Dúvidas sobre estes termos:\n\nTebex Log\nE-mail: juliana.soares@tebexlog.com.br\nTelefone: (12) 99736-4365` },
+  { title: '10. Contato', content: `Dúvidas sobre estes termos:\n\nTebex Log\nE-mail: contato@tebexlog.com.br\nTelefone: (12) 3266-0076` },
 ]
 
 export default function TermosPage() {

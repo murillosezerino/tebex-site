@@ -52,11 +52,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             name: 'Tebex Log',
             url: SITE_URL,
             description: 'Transportadora nacional especializada em transporte terrestre de cargas com gestão de risco completa.',
-            telephone: '+5512997364365',
-            email: 'juliana.soares@tebexlog.com.br',
+            telephone: '+551232660076',
+            email: 'contato@tebexlog.com.br',
             address: { '@type': 'PostalAddress', addressCountry: 'BR' },
             areaServed: { '@type': 'Country', name: 'Brazil' },
-            contactPoint: { '@type': 'ContactPoint', telephone: '+5512997364365', contactType: 'customer service', availableLanguage: 'Portuguese' },
+            contactPoint: { '@type': 'ContactPoint', telephone: '+551232660076', contactType: 'customer service', availableLanguage: 'Portuguese' },
           }) }}
         />
       </body>

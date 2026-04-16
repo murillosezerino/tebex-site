@@ -6,9 +6,9 @@ import { ParallaxBg, Reveal } from './ParallaxProvider'
 const services = [
   {
     title: 'Transporte de Carga',
-    desc: 'Frota própria e agregados para cargas fracionadas e fechadas, com rastreamento em tempo real e cobertura nacional.',
+    desc: 'Frota própria e agregados para cargas fechadas e de alto valor, com rastreamento em tempo real e cobertura nacional.',
     href: '/servicos#transporte',
-    highlights: ['Carga fracionada (LTL)', 'Carga fechada (FTL)', 'Coleta agendada'],
+    highlights: ['Carga fechada (FTL)', 'Coleta agendada', 'Carga de alto valor'],
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
     ),
