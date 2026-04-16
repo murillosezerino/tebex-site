@@ -105,56 +105,44 @@ export default function Services() {
           {services.map((s, i) => (
             <Reveal key={i} delay={0.15 + i * 0.2} direction={i === 0 ? 'left' : i === 2 ? 'right' : 'up'}>
               <div
-                className="service-card"
+                className="tbx-card tbx-card--interactive service-card"
+                onMouseMove={e => {
+                  const r = e.currentTarget.getBoundingClientRect()
+                  e.currentTarget.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
+                  e.currentTarget.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
+                }}
                 style={{
-                  position: 'relative',
-                  border: '1px solid rgba(255,255,255,0.08)',
                   padding: 'clamp(2rem, 4vw, 2.5rem)',
-                  background: 'linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
-                  backdropFilter: 'blur(8px)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1.25rem',
                   height: '100%',
-                  overflow: 'hidden',
                 }}
               >
-                {/* Top gradient line */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  background: 'linear-gradient(90deg, var(--accent), transparent)',
-                  opacity: 0,
-                  transition: 'opacity 0.3s',
-                }} className="card-line" />
-
-                {/* Corner glow */}
-                <div style={{
-                  position: 'absolute',
-                  top: '-60px',
-                  left: '-60px',
-                  width: '160px',
-                  height: '160px',
-                  background: 'radial-gradient(circle, rgba(255,212,0,0.04) 0%, transparent 70%)',
-                  pointerEvents: 'none',
-                }} />
+                <span className="tbx-card-accent" />
 
                 {/* Number + Icon header */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span style={{
-                    color: 'rgba(255,255,255,0.06)',
+                    color: 'rgba(255,255,255,0.07)',
                     fontFamily: 'var(--font)',
-                    fontSize: '3rem',
+                    fontSize: '3.25rem',
                     fontWeight: 200,
                     lineHeight: 1,
                     letterSpacing: '-0.04em',
                   }}>
                     0{i + 1}
                   </span>
-                  <div style={{ color: 'var(--accent)', opacity: 0.7 }}>
+                  <div className="service-card-icon" style={{
+                    color: 'var(--accent)',
+                    width: '52px', height: '52px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'linear-gradient(135deg, rgba(255,212,0,0.12), rgba(255,212,0,0.02))',
+                    border: '1px solid rgba(255,212,0,0.18)',
+                    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+                    transition: 'transform 0.5s var(--ease-out)',
+                  }}>
                     {s.icon}
                   </div>
                 </div>
@@ -162,7 +150,7 @@ export default function Services() {
                 <h3 style={{
                   color: '#FFFFFF',
                   fontWeight: 500,
-                  fontSize: 'clamp(1.1rem, 2vw, 1.25rem)',
+                  fontSize: 'clamp(1.15rem, 2vw, 1.3rem)',
                   margin: 0,
                   letterSpacing: '-0.01em',
                 }}>
@@ -170,7 +158,7 @@ export default function Services() {
                 </h3>
 
                 <p style={{
-                  color: 'rgba(255,255,255,0.5)',
+                  color: 'rgba(255,255,255,0.55)',
                   fontWeight: 300,
                   fontSize: '0.88rem',
                   lineHeight: 1.75,
@@ -183,7 +171,7 @@ export default function Services() {
                 <div style={{
                   width: '100%',
                   height: '1px',
-                  background: 'linear-gradient(90deg, rgba(255,212,0,0.15), rgba(255,255,255,0.05), transparent)',
+                  background: 'linear-gradient(90deg, rgba(255,212,0,0.2), rgba(255,255,255,0.06), transparent)',
                 }} />
 
                 {/* Highlights */}
@@ -193,12 +181,21 @@ export default function Services() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.65rem',
-                      color: 'rgba(255,255,255,0.5)',
+                      color: 'rgba(255,255,255,0.55)',
                       fontSize: '0.82rem',
                     }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.7 }}>
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
+                      <span style={{
+                        flexShrink: 0,
+                        width: '18px', height: '18px',
+                        borderRadius: '50%',
+                        background: 'rgba(255,212,0,0.1)',
+                        border: '1px solid rgba(255,212,0,0.2)',
+                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      </span>
                       {h}
                     </div>
                   ))}
@@ -213,8 +210,8 @@ export default function Services() {
                     fontSize: '0.85rem',
                     textDecoration: 'none',
                     marginTop: 'auto',
-                    paddingTop: '0.5rem',
-                    display: 'flex',
+                    paddingTop: '0.75rem',
+                    display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.5rem',
                     transition: 'gap 0.3s, color 0.3s',
@@ -237,19 +234,11 @@ export default function Services() {
       </div>
 
       <style>{`
-        .service-card {
-          transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
-        }
-        .service-card:hover {
-          border-color: rgba(255,212,0,0.3) !important;
-          background: linear-gradient(160deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%) !important;
-          transform: translateY(-6px);
-        }
-        .service-card:hover .card-line {
-          opacity: 1 !important;
+        .service-card:hover .service-card-icon {
+          transform: rotate(-4deg) scale(1.05);
         }
         .service-card:hover .card-link {
-          gap: 0.75rem !important;
+          gap: 0.85rem !important;
           color: #FFFFFF !important;
         }
       `}</style>

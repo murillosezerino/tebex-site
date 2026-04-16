@@ -175,21 +175,31 @@ export default function ServicosContent() {
               <Reveal delay={0.2} direction={idx % 2 === 0 ? 'right' : 'left'}>
                 <div style={{ order: idx % 2 === 0 ? 1 : 0 }}>
                   <div style={{
-                    display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px',
-                    backgroundColor: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
                   }}>
                     {s.features.map((f, i) => (
-                      <div key={i} className="svc-feature-card" style={{
-                        backgroundColor: 'rgba(10,10,10,0.9)',
-                        padding: 'clamp(1.25rem, 3vw, 1.75rem)',
-                        display: 'flex', flexDirection: 'column', gap: '0.5rem',
-                        transition: 'background 0.3s',
-                      }}>
-                        <div style={{ color: 'var(--white)', fontWeight: 600, fontSize: '0.85rem', lineHeight: 1.3 }}>
+                      <div key={i} className="tbx-card tbx-card--interactive svc-feature-card"
+                        onMouseMove={e => {
+                          const r = e.currentTarget.getBoundingClientRect()
+                          e.currentTarget.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
+                          e.currentTarget.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
+                        }}
+                        style={{
+                          padding: 'clamp(1.25rem, 3vw, 1.5rem)',
+                          display: 'flex', flexDirection: 'column', gap: '0.5rem',
+                          borderRadius: 'var(--radius-md)',
+                        }}>
+                        <span className="tbx-card-accent" />
+                        <div style={{
+                          width: '6px', height: '6px', borderRadius: '50%',
+                          background: 'var(--accent)',
+                          boxShadow: '0 0 10px rgba(255,212,0,0.6)',
+                          marginBottom: '0.25rem',
+                        }} />
+                        <div style={{ color: 'var(--white)', fontWeight: 600, fontSize: '0.88rem', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
                           {f.label}
                         </div>
-                        <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.8rem', lineHeight: 1.7 }}>
+                        <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', lineHeight: 1.65 }}>
                           {f.desc}
                         </div>
                       </div>
@@ -234,7 +244,6 @@ export default function ServicosContent() {
 
       <style>{`
         .svc-nav-btn:hover { border-color: var(--accent) !important; color: #fff !important; }
-        .svc-feature-card:hover { background: rgba(255,255,255,0.04) !important; }
       `}</style>
     </>
   )

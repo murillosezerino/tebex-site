@@ -109,11 +109,9 @@ export default function Features() {
         {/* Main card — redesigned */}
         <Reveal delay={0.15}>
           <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
+            className="tbx-card"
             style={{
-              position: 'relative',
-              background: 'linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(10,10,10,0.95) 100%)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 12,
+              borderRadius: 'var(--radius-xl)',
               padding: 'clamp(2rem, 5vw, 3.5rem)',
               marginBottom: '1.5rem',
               minHeight: 'clamp(280px, 35vw, 400px)',
@@ -121,8 +119,7 @@ export default function Features() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               gap: '2rem',
-              overflow: 'hidden',
-              transition: 'border-color 0.3s',
+              boxShadow: 'var(--shadow-lg)',
             }}>
             {/* Background image */}
             <div style={{
@@ -216,9 +213,14 @@ export default function Features() {
                   flexShrink: 0,
                   width: 'clamp(150px, 20vw, 200px)',
                   padding: '1.1rem 1rem 0.85rem',
-                  borderRadius: 8,
-                  border: isActive ? '1px solid rgba(255,212,0,0.25)' : '1px solid rgba(255,255,255,0.06)',
-                  backgroundColor: isActive ? 'rgba(255,255,255,0.05)' : 'transparent',
+                  borderRadius: 'var(--radius-md)',
+                  border: isActive ? '1px solid rgba(255,212,0,0.35)' : '1px solid rgba(255,255,255,0.06)',
+                  background: isActive
+                    ? 'linear-gradient(145deg, rgba(255,212,0,0.08), rgba(255,212,0,0.01))'
+                    : 'rgba(255,255,255,0.015)',
+                  boxShadow: isActive
+                    ? '0 8px 24px -10px rgba(255,212,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04)'
+                    : 'inset 0 1px 0 rgba(255,255,255,0.03)',
                   cursor: 'pointer',
                   textAlign: 'left',
                   outline: 'none',
@@ -227,7 +229,7 @@ export default function Features() {
                   gap: '0.35rem',
                   position: 'relative',
                   overflow: 'hidden',
-                  transition: 'all 0.25s',
+                  transition: 'all 0.35s var(--ease-out)',
                 }}>
                 {/* Active glow */}
                 {isActive && <div style={{

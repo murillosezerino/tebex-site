@@ -64,28 +64,41 @@ export default function StatsStrip() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
-          gap: '1px',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          gap: '1rem',
         }}>
           {stats.map((s, i) => (
             <Reveal key={s.value} delay={i * 0.1} direction="up">
-              <div className="stat-card" style={{
-                padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-                background: 'var(--black)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}>
-                <div className="stat-glow" style={{
-                  position: 'absolute',
-                  top: '-50px', right: '-50px',
-                  width: '150px', height: '150px',
-                  background: 'radial-gradient(circle, rgba(255,212,0,0.06) 0%, transparent 70%)',
-                  pointerEvents: 'none',
-                  opacity: 0, transition: 'opacity 0.4s',
+              <div
+                className="tbx-card tbx-card--interactive stat-card"
+                onMouseMove={e => {
+                  const r = e.currentTarget.getBoundingClientRect()
+                  e.currentTarget.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
+                  e.currentTarget.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
+                }}
+                style={{
+                  padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+                  height: '100%',
+                  display: 'flex', flexDirection: 'column', gap: '0.5rem',
+                }}
+              >
+                <span className="tbx-card-accent" />
+                {/* Subtle vertical accent strip */}
+                <div style={{
+                  position: 'absolute', left: 0, top: '20%', bottom: '20%', width: '2px',
+                  background: 'linear-gradient(180deg, transparent, rgba(255,212,0,0.4), transparent)',
+                  opacity: 0.5,
                 }} />
 
-                <div style={{ color: 'var(--accent)', opacity: 0.7, marginBottom: '1.25rem' }}>
+                <div className="stat-icon" style={{
+                  color: 'var(--accent)',
+                  width: '44px', height: '44px',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'linear-gradient(135deg, rgba(255,212,0,0.12), rgba(255,212,0,0.02))',
+                  border: '1px solid rgba(255,212,0,0.18)',
+                  marginBottom: '1rem',
+                  transition: 'transform 0.5s var(--ease-out)',
+                }}>
                   {s.icon}
                 </div>
 
@@ -93,22 +106,26 @@ export default function StatsStrip() {
                   fontFamily: 'var(--font)', fontWeight: 200,
                   fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
                   letterSpacing: '-0.04em', lineHeight: 1,
-                  color: 'var(--white)', marginBottom: '0.5rem',
+                  color: 'var(--white)',
+                  background: 'linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                 }}>
                   {s.value}
                 </div>
 
                 <div style={{
-                  fontSize: '0.78rem', fontWeight: 500, letterSpacing: '0.06em',
-                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)',
-                  whiteSpace: 'pre-line', lineHeight: 1.4, marginBottom: '0.5rem',
+                  fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em',
+                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)',
+                  whiteSpace: 'pre-line', lineHeight: 1.4, marginTop: '0.4rem',
                 }}>
                   {s.label}
                 </div>
 
                 <div style={{
                   fontSize: '0.78rem', fontWeight: 300,
-                  color: 'rgba(255,255,255,0.3)', lineHeight: 1.5,
+                  color: 'rgba(255,255,255,0.4)', lineHeight: 1.55,
                 }}>
                   {s.desc}
                 </div>
@@ -119,9 +136,7 @@ export default function StatsStrip() {
       </div>
 
       <style>{`
-        .stat-card { transition: background 0.3s; }
-        .stat-card:hover { background: #0E0E0E !important; }
-        .stat-card:hover .stat-glow { opacity: 1 !important; }
+        .stat-card:hover .stat-icon { transform: rotate(-5deg) scale(1.05); }
       `}</style>
     </section>
   )

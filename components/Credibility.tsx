@@ -107,34 +107,35 @@ export default function Credibility() {
           {keyPoints.map((item, i) => (
             <Reveal key={item.title} delay={0.4 + i * 0.15} direction="left">
               <FloatingElement speed={0.03}>
-                <div className="cred-card" style={{
-                  position: 'relative',
-                  padding: '1.5rem 1.25rem',
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  overflow: 'hidden',
-                }}>
-                  {/* Left accent bar */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '12px',
-                    bottom: '12px',
-                    left: 0,
-                    width: '2px',
-                    background: 'linear-gradient(180deg, var(--accent) 0%, rgba(255,212,0,0.1) 100%)',
-                  }} />
-
-                  {/* Icon */}
-                  <div style={{
+                <div
+                  className="tbx-card tbx-card--interactive cred-card"
+                  onMouseMove={e => {
+                    const r = e.currentTarget.getBoundingClientRect()
+                    e.currentTarget.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
+                    e.currentTarget.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
+                  }}
+                  style={{
+                    padding: '1.6rem 1.4rem 1.5rem',
+                    height: '100%',
+                  }}
+                >
+                  <span className="tbx-card-accent" />
+                  {/* Icon chip */}
+                  <div className="cred-card-icon" style={{
+                    width: '42px', height: '42px',
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                     color: 'var(--accent)',
-                    marginBottom: '0.85rem',
-                    opacity: 0.9,
+                    background: 'linear-gradient(135deg, rgba(255,212,0,0.14), rgba(255,212,0,0.02))',
+                    border: '1px solid rgba(255,212,0,0.2)',
+                    borderRadius: 'var(--radius-sm)',
+                    marginBottom: '1rem',
+                    transition: 'transform 0.5s var(--ease-out)',
                   }}>
                     {item.icon}
                   </div>
 
                   <div style={{
-                    fontSize: '0.9rem',
+                    fontSize: '0.95rem',
                     fontWeight: 600,
                     color: 'var(--white)',
                     marginBottom: '0.4rem',
@@ -145,8 +146,8 @@ export default function Credibility() {
                   <div style={{
                     fontSize: '0.8rem',
                     fontWeight: 300,
-                    color: 'rgba(255,255,255,0.45)',
-                    lineHeight: 1.6,
+                    color: 'rgba(255,255,255,0.5)',
+                    lineHeight: 1.65,
                   }}>
                     {item.desc}
                   </div>
@@ -165,14 +166,7 @@ export default function Credibility() {
       </div>
 
       <style>{`
-        .cred-card {
-          transition: border-color 0.3s, transform 0.3s, background 0.3s;
-        }
-        .cred-card:hover {
-          border-color: rgba(255,212,0,0.2) !important;
-          transform: translateY(-3px);
-          background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%) !important;
-        }
+        .cred-card:hover .cred-card-icon { transform: rotate(-5deg) scale(1.06); }
       `}</style>
     </section>
   )
