@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Logo from './Logo'
 
 export default function Footer() {
@@ -152,9 +153,9 @@ export default function Footer() {
         <div className="tbx-footer-top">
           {/* Brand */}
           <div className="tbx-footer-col tbx-footer-brand-card">
-            <a href="/" aria-label="Tebex Log — início" className="tbx-footer-logo">
+            <Link href="/" aria-label="Tebex Log — início" className="tbx-footer-logo">
               <Logo height="clamp(48px, 6vw, 64px)" />
-            </a>
+            </Link>
             <span className="tbx-footer-tag">
               <span className="tbx-footer-tag-dot" />
               Central 24/7 ativa
