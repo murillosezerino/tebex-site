@@ -69,7 +69,8 @@ export default function Footer() {
         }
         .tbx-footer-col a {
           position: relative;
-          display: inline-flex; align-items: center; gap: 0.4rem;
+          display: flex; align-items: center; gap: 0.4rem;
+          width: fit-content;
         }
         .tbx-footer-col a::before {
           content: '→'; opacity: 0; margin-left: -0.85rem;
