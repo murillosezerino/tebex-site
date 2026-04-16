@@ -16,7 +16,7 @@
   --accent: #FFD400;
   --accent-soft: rgba(255, 212, 0, 0.12);
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nav-h: 56px;
+  --nav-h: 76px;
 
   /* Surface system — depth via tonal variation */
   --surface-1: rgba(255, 255, 255, 0.025);
@@ -63,6 +63,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: var(--nav-h);
+}
+
+@media (max-width: 767px) {
+  :root { --nav-h: 64px; }
 }
 
 /* ─── TIPOGRAFIA ─── */

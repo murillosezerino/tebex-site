@@ -80,23 +80,45 @@ export default function Navbar() {
         }
       `}</style>
 
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, pointerEvents: 'none' }}>
+        {/* Soft top fade so the logo always reads, even on transparent navbar */}
         <div style={{
-          backgroundColor: showBg ? 'rgba(10,10,10,0.85)' : 'rgba(10,10,10,0.15)',
-          backdropFilter: 'blur(16px)',
-          borderBottom: showBg ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
-          transition: 'background-color 0.4s, border-color 0.4s',
-        }}>
+          position: 'absolute', inset: 0,
+          background: showBg
+            ? 'linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.7) 60%, rgba(10,10,10,0.55) 100%)'
+            : 'linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 55%, transparent 100%)',
+          backdropFilter: showBg ? 'blur(18px) saturate(140%)' : 'blur(6px)',
+          WebkitBackdropFilter: showBg ? 'blur(18px) saturate(140%)' : 'blur(6px)',
+          transition: 'background 0.5s, backdrop-filter 0.5s',
+          maskImage: showBg ? 'none' : 'linear-gradient(180deg, #000 0%, #000 70%, transparent 100%)',
+          WebkitMaskImage: showBg ? 'none' : 'linear-gradient(180deg, #000 0%, #000 70%, transparent 100%)',
+        }} />
+
+        {/* Hairline accent under nav, only when scrolled */}
+        <div style={{
+          position: 'absolute', left: 0, right: 0, bottom: 0, height: '1px',
+          background: 'linear-gradient(90deg, transparent, rgba(255,212,0,0.4) 50%, transparent)',
+          opacity: showBg ? 1 : 0,
+          transition: 'opacity 0.5s',
+        }} />
+
+        <div style={{ position: 'relative', pointerEvents: 'auto' }}>
           <div style={{
             maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem',
-            height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            height: 'var(--nav-h)', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           }}>
             <span
               onClick={() => window.location.href = '/'}
               aria-label="Tebex Log — página inicial"
-              style={{ textDecoration: 'none', zIndex: 110, display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              style={{
+                textDecoration: 'none', zIndex: 110, display: 'flex', alignItems: 'center', cursor: 'pointer',
+                filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.55))',
+                transition: 'transform 0.4s var(--ease-out)',
+              }}
+              onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.04)')}
+              onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
             >
-              <Logo height={26} />
+              <Logo height="clamp(30px, 4.5vw, 42px)" />
             </span>
 
             <nav className="tbx-desktop" style={{ alignItems: 'center', gap: '2.5rem' }}>
