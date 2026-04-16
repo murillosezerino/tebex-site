@@ -118,7 +118,7 @@ export default function Navbar() {
               onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.04)')}
               onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
             >
-              <Logo height="clamp(30px, 4.5vw, 42px)" />
+              <Logo height="clamp(40px, 6vw, 58px)" />
             </span>
 
             <nav className="tbx-desktop" style={{ alignItems: 'center', gap: '2.5rem' }}>
